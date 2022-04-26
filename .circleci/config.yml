@@ -107,7 +107,7 @@ jobs:
       - run:
           name: Scan frontend dependencies
           command: |
-            return 0
+            exit 0
             # cd frontend
             # npm install oauth-sign@^0.9.0
             # npm install
@@ -124,7 +124,7 @@ jobs:
       - run:
           name: Scan backend dependencies
           command: |
-            return 0
+            exit 0
             # cd backend
             # npm install
             # npm audit fix --audit-level=critical
