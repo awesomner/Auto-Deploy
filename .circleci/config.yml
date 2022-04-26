@@ -408,9 +408,9 @@ jobs:
       steps:
         - checkout
         - run:
-          name: Install dependencies
-          command: |
-            yum -y install tar gzip
+            name: Install dependencies
+            command: |
+              yum -y install tar gzip
         - attach_workspace:
             at: ~/
         - run:
