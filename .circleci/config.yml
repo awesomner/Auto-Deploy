@@ -26,8 +26,10 @@ commands:
           name: Revert migrations
           when: on_fail
           command: |
-            SUCCESS=$(curl --insecure  https://kvdb.io/NCxEtqDPny473FnG3NSnoe/migration_<< parameters.workflow_id >>)
-            if(( $SUCCESS==1 ));
+            SUCCESS=$(curl --insecure --request GET https://kvdb.io/NCxEtqDPny473FnG3NSnoe/migration_<< parameters.workflow_id >>)
+            echo $SUCCESS
+            echo << parameters.workflow_id >>
+            if (( $SUCCESS==1 ));
             then
               cd ~/project/backend
               npm install
@@ -223,8 +225,9 @@ jobs:
             then
               curl https://kvdb.io/NCxEtqDPny473FnG3NSnoe/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d "1"
             fi
-      # - destroy-environment:
-      #     workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
+            echo ${CIRCLE_WORKFLOW_ID:0:7}
+      - destroy-environment:
+          workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
 
   deploy-frontend:
     docker:
