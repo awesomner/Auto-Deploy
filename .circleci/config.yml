@@ -363,7 +363,7 @@ jobs:
             echo "${API_URL}"
             if curl "${API_URL}/api/status" | grep "ok"
             then
-              return 0
+              return 1
             else
               return 1
             fi
@@ -436,6 +436,7 @@ jobs:
               export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" --stack-status-filter CREATE_COMPLETE --no-paginate --output text))
               echo OldWorkflowID: "${OldWorkflowID}"
               echo Stacks: "${STACKS[@]}"
+
         - run:
             name: Remove old stacks and files
             command: |
