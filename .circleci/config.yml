@@ -445,7 +445,7 @@ jobs:
               OldWorkflowID=$(cat ~/OldWorkflowID.txt)
               echo OldWorkflowID: "${OldWorkflowID: -7}"
               echo STACKS: "${STACKS[*]}"
-              if [[ ${STACKS[*]} =~ (^|[[:space:]])"${OldWorkflowID: -7}"($|[[:space:]]) ]];
+              if [[ ${STACKS[*]} =~ "${OldWorkflowID: -7}" ]];
               then
                 aws s3 rm s3://udapeople-${OldWorkflowID: -7} --recursive
                 aws s3api delete-bucket --bucket udapeople-${OldWorkflowID: -7} --region eu-central-1
